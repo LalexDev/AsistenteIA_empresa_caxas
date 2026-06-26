@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sistema web con inteligencia artificial para gestión de pedidos e inventario" />
+  <title>CaxasIA Cajamarca</title>
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <section id="loginView" class="login-view">
+    <div class="login-panel">
+      <div class="brand brand-large">
+        <img class="brand-logo-image" src="assets/images/logo-caxasia.webp" alt="CaxasIA" />
+      </div>
+      <div class="login-copy">
+        <span class="eyebrow">TESIS 2026</span>
+        <h2>Controla tu negocio con información en tiempo real</h2>
+        <p>Monitorea 44 pequeñas empresas de Cajamarca, sus pedidos, inventario y recomendaciones de reposición desde una sola plataforma.</p>
+        <div class="feature-grid">
+          <div><strong>Stock</strong><span>Actualización automática</span></div>
+          <div><strong>Pedidos</strong><span>Seguimiento por estados</span></div>
+          <div><strong>IA</strong><span>Predicción y alertas</span></div>
+          <div><strong>Reportes</strong><span>Exportación CSV/JSON</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="login-card-wrap">
+      <form id="loginForm" class="login-card" autocomplete="off">
+        <div class="mobile-brand">
+          <img class="brand-icon-image" src="assets/images/brand-icon.png" alt="" />
+          <strong>CaxasIA</strong>
+        </div>
+        <span class="eyebrow">ACCESO AL SISTEMA</span>
+        <h2>Bienvenido</h2>
+        <p>Ingresa con tus credenciales de acceso.</p>
+        <label>Correo electrónico
+          <input id="loginEmail" type="email" placeholder="Ingresa tu correo" autocomplete="off" autocapitalize="none" spellcheck="false" required />
+        </label>
+        <label>Contraseña
+          <div class="password-row">
+            <input id="loginPassword" type="password" placeholder="Ingresa tu contraseña" autocomplete="off" required />
+            <button id="togglePassword" class="icon-button" type="button" aria-label="Mostrar contraseña">👁</button>
+          </div>
+        </label>
+        <button class="btn btn-primary btn-block" type="submit">Ingresar</button>
+      </form>
+    </div>
+  </section>
+
+  <div id="appView" class="app-shell hidden">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand sidebar-brand">
+        <img class="sidebar-logo-image" src="assets/images/logo-caxasia.webp" alt="CaxasIA" />
+        <small>Cajamarca 2026</small>
+      </div>
+      <nav id="mainNav" class="nav-list">
+        <button class="nav-item active" data-view="dashboard"><span>▦</span>Dashboard</button>
+        <button class="nav-item" data-view="companies"><span>🏪</span>Empresas</button>
+        <button class="nav-item" data-view="products"><span>▣</span>Productos</button>
+        <button class="nav-item" data-view="inventory"><span>⇄</span>Inventario</button>
+        <button class="nav-item" data-view="orders"><span>🛒</span>Pedidos</button>
+        <button class="nav-item" data-view="reports"><span>▥</span>Reportes</button>
+        <button class="nav-item" data-view="ai"><span>✦</span>Inteligencia artificial</button>
+        <button class="nav-item admin-only" data-view="settings"><span>⚙</span>Configuración</button>
+      </nav>
+      <div class="sidebar-foot">
+        <small>Monitoreo empresarial</small>
+        <strong>44 empresas Cajamarca</strong>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button id="menuButton" class="icon-button menu-button" type="button">☰</button>
+          <div><h1 id="pageTitle">Dashboard</h1><p id="pageSubtitle">Resumen operativo del negocio</p></div>
+        </div>
+        <div class="topbar-right">
+          <div class="status-pill"><span></span> Sistema operativo</div>
+          <button id="themeButton" class="icon-button" type="button" title="Cambiar tema">◐</button>
+          <div class="user-menu">
+            <button id="userMenuButton" class="user-button" type="button">
+              <div id="userAvatar" class="avatar">AV</div>
+              <div><strong id="userName">Administrador</strong><small id="userRole">ADMIN</small></div>
+              <span>⌄</span>
+            </button>
+            <div id="userDropdown" class="dropdown hidden">
+              <button id="logoutButton" type="button">Cerrar sesión</button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="content-area">
+        <div id="dashboard" class="view active-view"></div>
+        <div id="companies" class="view"></div>
+        <div id="products" class="view"></div>
+        <div id="inventory" class="view"></div>
+        <div id="orders" class="view"></div>
+        <div id="reports" class="view"></div>
+        <div id="ai" class="view"></div>
+        <div id="settings" class="view"></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="assistantWidget" class="assistant-widget hidden" aria-live="polite">
+    <button id="assistantFab" class="assistant-fab" type="button" aria-label="Abrir asistente virtual" title="Asistente CaxasIA">
+      <img class="assistant-fab-image" src="assets/images/assistant-caxasia.png" alt="" />
+      <span class="assistant-fab-text">Asistente IA</span>
+      <span class="assistant-online-dot"></span>
+    </button>
+
+    <section id="assistantPanel" class="assistant-panel" aria-label="Asistente virtual CaxasIA">
+      <header class="assistant-header">
+        <div class="assistant-identity">
+          <div class="assistant-avatar"><img src="assets/images/assistant-caxasia.png" alt="" /></div>
+          <div><strong>CaxasIA</strong><small><span></span> Asistente conectado al sistema</small></div>
+        </div>
+        <div class="assistant-header-actions">
+          <button id="assistantClear" class="assistant-icon-button" type="button" title="Limpiar conversación">↻</button>
+          <button id="assistantClose" class="assistant-icon-button" type="button" aria-label="Cerrar asistente">×</button>
+        </div>
+      </header>
+
+      <div id="assistantMessages" class="assistant-messages">
+        <div class="assistant-message assistant-bot">
+          <div class="assistant-mini-avatar"><img src="assets/images/assistant-caxasia.png" alt="" /></div>
+          <div class="assistant-bubble">
+            Hola, soy <strong>CaxasIA</strong>. Puedo consultar empresas monitoreadas, inventario, pedidos, ventas, productos y recomendaciones de reposición.
+          </div>
+        </div>
+      </div>
+
+      <div class="assistant-suggestions">
+        <button type="button" data-assistant-prompt="¿Qué productos tienen bajo stock?">Bajo stock</button>
+        <button type="button" data-assistant-prompt="¿Qué productos debo reponer?">Reposición</button>
+        <button type="button" data-assistant-prompt="¿Cuántos pedidos están pendientes?">Pedidos</button>
+        <button type="button" data-assistant-prompt="Dame un resumen del negocio">Resumen</button>
+      </div>
+
+      <form id="assistantForm" class="assistant-form">
+        <input id="assistantInput" type="text" placeholder="Pregunta sobre el negocio..." autocomplete="off" aria-label="Consulta para CaxasIA" />
+        <button type="submit" aria-label="Enviar consulta">➤</button>
+      </form>
+      <footer class="assistant-footer">Respuestas generadas con los datos registrados en el sistema.</footer>
+    </section>
+  </div>
+
+  <div id="modalRoot"></div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
